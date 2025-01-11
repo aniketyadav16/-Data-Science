@@ -3,10 +3,10 @@ import pickle
 import numpy as np
 
 # Load the models
-with open('/Users/aniketyadav/Documents/DS/Projects/linear_model.pkl', 'rb') as f:
+with open('linear_model.pkl', 'rb') as f:
     linear_model = pickle.load(f)
 
-with open('/Users/aniketyadav/Documents/DS/Projects/logistic_model.pkl', 'rb') as f:
+with open('logistic_model.pkl', 'rb') as f:
     logistic_model = pickle.load(f)
 
 # Streamlit app

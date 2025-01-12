@@ -3,15 +3,22 @@ import pickle
 import numpy as np
 import os
 
-model_path = os.path.join(os.getcwd(), 'linear_model.pkl')
-
-with open(model_path, 'rb') as f:
-    linear_model = pickle.load(f)
-
+model_path1 = os.path.join(os.getcwd(), 'linear_model.pkl')
 model_path2 = os.path.join(os.getcwd(), 'logistic_model.pkl')
 
-with open(model_path2, 'rb') as f:
-    logistic_model = pickle.load(f)
+if os.path.exists(model_path1):
+    with open(model_path1, 'rb') as f:
+        linear_model = pickle.load(f)
+        print("Linear Model Loaded Successfully!")
+else:
+    print("Error: Linear model file not found.")
+
+if os.path.exists(model_path2):
+    with open(model_path2, 'rb') as f:
+        logistic_model = pickle.load(f)
+        print("Logistic Model Loaded Successfully!")
+else:
+    print("Error: Logistic model file not found.")
 
 
 # Inputs

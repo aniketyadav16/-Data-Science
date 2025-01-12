@@ -2,15 +2,16 @@ import streamlit as st
 import pickle
 import numpy as np
 
-# Load the models
-with open('linear_model.pkl', 'rb') as f:
+model_path = os.path.join(os.getcwd(), 'linear_model.pkl')
+
+with open(model_path, 'rb') as f:
     linear_model = pickle.load(f)
 
-with open('logistic_model.pkl', 'rb') as f:
+model_path2 = os.path.join(os.getcwd(), 'logistic_model.pkl')
+
+with open(model_path2, 'rb') as f:
     logistic_model = pickle.load(f)
 
-# Streamlit app
-st.title("Diamond Predictions Model")
 
 # Inputs
 st.header("Input Features")

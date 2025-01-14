@@ -19,7 +19,7 @@ if feature_2 == 0 and feature_3 == 0:
     st.warning("Please enter non-zero values for Length and Width.")
     feature_5 = 0
 else:
-    feature_5 = ((feature_4 / ((feature_2 + feature_3) / 2))*100) 
+    feature_5 = ((feature_4 / ((feature_2 + feature_3)/2)) * 100) 
 
 st.write(f"feature 5:{feature_5}")
 

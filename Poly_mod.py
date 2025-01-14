@@ -4,7 +4,7 @@ import numpy as np
 from sklearn.preprocessing import PolynomialFeatures
 from joblib import load
 
-linear_mod = load('Model/polynomial_model.joblib')
+linear_mod = load('Model/linear_model.joblib')
 logistic_mod = load('Model/logistic_model.joblib')
 
 poly = PolynomialFeatures(degree=4)
@@ -19,9 +19,8 @@ price = st.number_input("Enter Price:")
 if st.button("Predict Price"):
     if feature_5 != 0:
         input_data = np.array([[feature_1, feature_5, feature_2, feature_3, feature_4]])
-        input_data = poly.fit_transform(input_data)
         linear_pred = linear_mod.predict(input_data)
-        st.subheader(linear_pred[0].round())
+        st.subheader(f"Predicted Price Is:{linear_pred[0].round()}")
     else:
         st.error("Cannot predict due to invalid input values.")
 

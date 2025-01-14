@@ -15,8 +15,8 @@ def download_model(url, filename):
         return None
     return filename
 
-url_poly_model = "https://github.com/aniketyadav16/-Data-Science/raw/main/Model/polynomial_model.joblib"
-url_logistic_model = "https://github.com/aniketyadav16/-Data-Science/raw/main/Model/logistic_model.joblib"
+url = "https://raw.githubusercontent.com/aniketyadav16/-Data-Science/main/Model/polynomial_model.joblib"
+url2 = "https://raw.githubusercontent.com/aniketyadav16/-Data-Science/main/Model/logistic_model.joblib"
 
 poly_model_file = download_model(url_poly_model, "poly_model.joblib")
 logistic_model_file = download_model(url_logistic_model, "log_model.joblib")

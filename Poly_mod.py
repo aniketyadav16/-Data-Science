@@ -13,7 +13,7 @@ feature_1 = st.slider("Select Carat", min_value=0.0, max_value=10.0, value=1.0, 
 feature_2 = st.slider("Select Length Of The Diamond", min_value=0, max_value=40, value=0, step=1)
 feature_3 = st.slider("Select Width Of The Diamond", min_value=0, max_value=40, value=0, step=1)
 feature_4 = st.slider("Select Depth Of The Diamond", min_value=0, max_value=40, value=0, step=1)
-Price = st.input_number("Enter The Price:")
+Price = st.number_input("Enter The Price:")
 
 if feature_2 == 0 and feature_3 == 0:
     st.warning("Please enter non-zero values for Length and Width.")

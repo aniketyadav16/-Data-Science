@@ -1,8 +1,14 @@
 import streamlit as st
 import pickle
 import numpy as np
+import joblib 
+import requests
 
-from joblib import load
+url = 
+
+
+
+
 
 linear_mod = load('linear_model.joblib')
 logistic_mod = load('logistic_model.joblib')

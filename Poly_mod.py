@@ -21,6 +21,8 @@ if feature_2 == 0 and feature_3 == 0:
 else:
     feature_5 = ((feature_4 / ((feature_2 + feature_3) / 2))*100) 
 
+st.write(f"feature 5:{feature_5"})
+
 if st.button("Predict Price"):
     if feature_5 != 0:
         input_data = np.array([[feature_1, feature_5, feature_2, feature_3, feature_4]])

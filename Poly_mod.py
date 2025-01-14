@@ -31,7 +31,7 @@ if st.button("Predict Price"):
         st.error("Cannot predict due to invalid input values.")
 
 if st.button("Recommendation"):
-    price = linear_pred
+    price = linear_pred[0]
     if feature_5 != 0:
         input_data2 = np.array([[price, feature_1, feature_5, feature_2, feature_3, feature_4]])
         logistic_pred = logistic_mod.predict(input_data2)

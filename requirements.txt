@@ -1,5 +1,5 @@
 streamlit
-requests
+pickle
+numpy
 joblib
 sklearn
-pickle

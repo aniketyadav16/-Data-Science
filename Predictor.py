@@ -4,11 +4,10 @@ import joblib
 import requests
 from sklearn.preprocessing import PolynomialFeatures
 
-# Function to download models
 def download_model(url, filename):
     try:
         response = requests.get(url)
-        response.raise_for_status()  # Check if the request was successful
+        response.raise_for_status() 
         with open(filename, "wb") as f:
             f.write(response.content)
     except requests.exceptions.RequestException as e:
@@ -16,15 +15,12 @@ def download_model(url, filename):
         return None
     return filename
 
-# URLs of the models (ensure they are raw links for proper downloading)
 url_poly_model = "https://github.com/aniketyadav16/-Data-Science/raw/main/Model/polynomial_model.joblib"
 url_logistic_model = "https://github.com/aniketyadav16/-Data-Science/raw/main/Model/logistic_model.joblib"
 
-# Download the models
 poly_model_file = download_model(url_poly_model, "poly_model.joblib")
 logistic_model_file = download_model(url_logistic_model, "log_model.joblib")
 
-# Load models if they were successfully downloaded
 if poly_model_file:
     linear_mod = joblib.load(poly_model_file)
 else:
@@ -43,7 +39,6 @@ feature_2 = st.number_input("Enter Length Of The Diamond")
 feature_3 = st.number_input("Enter Width Of The Diamond")
 feature_4 = st.number_input("Enter Depth Of The Diamond")
 
-# Calculate Feature 5 (Depth Ratio)
 if feature_2 == 0 and feature_3 == 0:
     st.warning("Please enter non-zero values for Length and Width.")
     feature_5 = 0

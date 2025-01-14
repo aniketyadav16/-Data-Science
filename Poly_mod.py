@@ -19,17 +19,14 @@ if feature_2 == 0 and feature_3 == 0:
     st.warning("Please enter non-zero values for Length and Width.")
     feature_5 = 0
 else:
-    feature_5 = ((feature_4 / ((feature_2 + feature_3) / 2))*100) if (feature_2 + feature_3) != 0 else 0
-
-if feature_5 == 0:
-    st.warning("Feature 5 is invalid. Please check your inputs.")
+    feature_5 = ((feature_4 / ((feature_2 + feature_3) / 2))*100) 
 
 if st.button("Predict Price"):
     if feature_5 != 0:
         input_data = np.array([[feature_1, feature_5, feature_2, feature_3, feature_4]])
         input_data = poly.fit_transform(input_data)
         linear_pred = linear_mod.predict(input_data)
-        st.subheader(f"Predicted Price: ${linear_pred[0].round()}k")
+        st.subheader(linear_pred[0].round())
     else:
         st.error("Cannot predict due to invalid input values.")
 

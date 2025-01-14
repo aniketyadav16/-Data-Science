@@ -4,8 +4,8 @@ import numpy as np
 from sklearn.preprocessing import PolynomialFeatures
 from joblib import load
 
-linear_mod = load('/Users/aniketyadav/Documents/DS/Projects/polynomial_model.joblib')
-logistic_mod = load('/Users/aniketyadav/Documents/DS/Projects/logistic_model.joblib')
+linear_mod = load('Model/polynomial_model.joblib')
+logistic_mod = load('Model/logistic_model.joblib')
 
 poly = PolynomialFeatures(degree=4)
 st.header("Input Features")

@@ -10,11 +10,16 @@ logistic_mod = load('Model/logistic_model.joblib')
 poly = PolynomialFeatures(degree=4)
 st.header("Input Features")
 feature_1 = st.number_input("Enter Carat")
-feature_5 = st.number_input("Enter Depth ratio Of The Diamond")
 feature_2 = st.number_input("Enter Length Of The Diamond")
 feature_3 = st.number_input("Enter Width Of The Diamond")
 feature_4 = st.number_input("Enter Depth Of The Diamond")
 price = st.number_input("Enter Price:")
+
+if feature_2 == 0 and feature_3 == 0:
+    st.warning("Please enter non-zero values for Length and Width.")
+    feature_5 = 0
+else:
+    feature_5 = ((feature_4 / ((feature_2 + feature_3) / 2))*100) 
 
 if st.button("Predict Price"):
     if feature_5 != 0:

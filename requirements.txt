@@ -3,4 +3,4 @@ pickle
 numpy
 joblib
 requests
-sklearn
+scikit-learn

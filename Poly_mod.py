@@ -20,7 +20,7 @@ if feature_2 == 0 and feature_3 == 0:
     feature_5 = 0
 else:
     feature_5 = ((feature_4 / ((feature_2 + feature_3)/2)) * 100)
-feature_5 = feature_5.round()
+feature_5 = round(feature_5,1)
 st.write(f"feature 5:{feature_5}")
 
 if st.button("Predict Price"):

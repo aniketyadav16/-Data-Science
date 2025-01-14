@@ -2,4 +2,5 @@ streamlit
 pickle
 numpy
 joblib
+requests
 sklearn

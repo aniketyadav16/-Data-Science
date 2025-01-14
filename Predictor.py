@@ -1,23 +1,39 @@
 import streamlit as st
-import pickle
 import numpy as np
 import joblib 
 import requests
 from sklearn.preprocessing import PolynomialFeatures
 
-url = "https://github.com/aniketyadav16/-Data-Science/blob/main/Model/polynomial_model.joblib"
-url2 = "https://github.com/aniketyadav16/-Data-Science/blob/main/Model/logistic_model.joblib"
+# Function to download models
+def download_model(url, filename):
+    try:
+        response = requests.get(url)
+        response.raise_for_status()  # Check if the request was successful
+        with open(filename, "wb") as f:
+            f.write(response.content)
+    except requests.exceptions.RequestException as e:
+        st.error(f"Error downloading model from {url}: {e}")
+        return None
+    return filename
 
-response = requests.get(url)
-with open("poly_model.joblib", "wb") as f:
-    f.write(response.content)
+# URLs of the models (ensure they are raw links for proper downloading)
+url_poly_model = "https://github.com/aniketyadav16/-Data-Science/raw/main/Model/polynomial_model.joblib"
+url_logistic_model = "https://github.com/aniketyadav16/-Data-Science/raw/main/Model/logistic_model.joblib"
 
-response2 = requests.get(url2)
-with open("log_model.joblib", "wb") as f:
-    f.write(response2.content)
-    
-linear_mod = joblib.load('poly_model.joblib')
-logistic_mod = joblib.load('log_model.joblib')
+# Download the models
+poly_model_file = download_model(url_poly_model, "poly_model.joblib")
+logistic_model_file = download_model(url_logistic_model, "log_model.joblib")
+
+# Load models if they were successfully downloaded
+if poly_model_file:
+    linear_mod = joblib.load(poly_model_file)
+else:
+    st.error("Polynomial model could not be loaded. Exiting...")
+
+if logistic_model_file:
+    logistic_mod = joblib.load(logistic_model_file)
+else:
+    st.error("Logistic model could not be loaded. Exiting...")
 
 poly = PolynomialFeatures(degree=4)
 

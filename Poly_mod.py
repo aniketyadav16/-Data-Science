@@ -13,7 +13,6 @@ feature_1 = st.number_input("Enter Carat")
 feature_2 = st.number_input("Enter Length Of The Diamond")
 feature_3 = st.number_input("Enter Width Of The Diamond")
 feature_4 = st.number_input("Enter Depth Of The Diamond")
-price = st.number_input("Enter Price:")
 
 if feature_2 == 0 and feature_3 == 0:
     st.warning("Please enter non-zero values for Length and Width.")
@@ -32,6 +31,7 @@ if st.button("Predict Price"):
         st.error("Cannot predict due to invalid input values.")
 
 if st.button("Recommendation"):
+    price = st.number_input("Enter Price:")
     if feature_5 != 0:
         input_data2 = np.array([[price, feature_1, feature_5, feature_2, feature_3, feature_4]])
         logistic_pred = logistic_mod.predict(input_data2)

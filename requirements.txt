@@ -1,3 +1,5 @@
 streamlit
 requests
 joblib
+scikit-learn
+pickle

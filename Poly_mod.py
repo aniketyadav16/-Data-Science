@@ -34,7 +34,7 @@ if st.button("Predict Price"):
 
 if st.button("Recommendation"):
     if feature_5 != 0:
-        input_data2 = np.array([[price, feature_1, feature_5, feature_2, feature_3, feature_4]])
+        input_data2 = np.array([[Price, feature_1, feature_5, feature_2, feature_3, feature_4]])
         logistic_pred = logistic_mod.predict(input_data2)
         if logistic_pred == [1]:
             logistic_pred = "It is Recommended To BUY this DIAMOND!!"

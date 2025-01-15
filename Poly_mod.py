@@ -27,6 +27,10 @@ if st.button("Predict Price"):
     if feature_5 != 0:
         input_data = np.array([[feature_1, feature_5, feature_2, feature_3, feature_4]])
         linear_pred = linear_mod.predict(input_data)
+        if linear_pred < 0:
+            linear_pred = -(linear_pred)
+        else:
+            linear_pred = linear_pred
         st.subheader(f"Predicted Price Is: ${linear_pred[0].round()}")
     else:
         st.error("Cannot predict due to invalid input values.")

@@ -3,3 +3,6 @@ numpy
 joblib
 requests
 scikit-learn
+plotly
+seaborn
+matplotlib

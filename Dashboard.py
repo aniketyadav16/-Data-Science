@@ -17,8 +17,8 @@ df = px.data.gapminder()
 fig11 = px.scatter(df, x="gdpPercap", y="lifeExp", animation_frame="year", animation_group="country",
                  size="pop", color="continent", hover_name="country",
                  log_x=True, size_max=60, title="GDP vs Life Expectancy Over Time",
-                 template="plotly_dark")
-fig11.layout.updatemenus[0].buttons[0].args[1]["frame"]["duration"] = 1000  
+                 template="plotly_dark") 
+fig11.update_layout(height=550)
 st.plotly_chart(fig11)
 
 st.subheader("Polar Chart - Wind Data")

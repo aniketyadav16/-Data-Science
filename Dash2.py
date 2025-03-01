@@ -71,13 +71,12 @@ with col2:
 col3, col4 = st.columns(2)
 
 with col3:
-    st.subheader("Whale Trade Swarms")
+    st.subheader("Whale Trade Distribution")
     pool_filter = st.multiselect("Filter Pools", df_defi["Pool"].unique(), default=df_defi["Pool"].unique())
     filtered_df = df_defi[df_defi["Pool"].isin(pool_filter)]
     fig, ax = plt.subplots(figsize=(8, 4), facecolor="#1a1a1a")
-    sns.violinplot(x="Pool", y="Whale_Trades", data=filtered_df, ax=ax, inner=None, palette=["#00b4d8", "#7209b7"])
-    sns.swarmplot(x="Pool", y="Whale_Trades", data=filtered_df, ax=ax, color="#f72585", size=4)
-    ax.set_title("Whale Trade Swarms", color="white")
+    sns.violinplot(x="Pool", y="Whale_Trades", data=filtered_df, ax=ax, palette=["#00b4d8", "#7209b7"])
+    ax.set_title("Whale Trade Distribution", color="white")
     ax.set_facecolor("#1a1a1a")
     ax.tick_params(colors="white")
     st.pyplot(fig)
@@ -155,11 +154,11 @@ with col8:
 col9, col10 = st.columns(2)
 
 with col9:
-    st.subheader("Haul Value by Truck")
+    st.subheader("Haul Value by Truck (USD)")
     truck_choice = st.selectbox("Select Truck", df_truck["Truck_ID"].unique())
     filtered_truck = df_truck[df_truck["Truck_ID"] == truck_choice]
     fig9 = px.bar(filtered_truck, x="Date", y="Haul_Value_USD", 
-                  title="Haul Value by Truck", color_discrete_sequence=["#00b4d8"])
+                  title="Haul Value by Truck (USD)", color_discrete_sequence=["#00b4d8"])
     fig9.update_layout(template="plotly_dark", title_x=0.5, showlegend=False)
     st.plotly_chart(fig9, use_container_width=True)
 

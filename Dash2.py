@@ -89,3 +89,51 @@ with col4:
     fig4.update_layout(template="plotly_dark", title="Liquidity Flow Between Pools", title_x=0.5, font_size=10)
     st.plotly_chart(fig4, use_container_width=True)
 
+col5, col6 = st.columns(2)
+
+with col5:
+    st.subheader("Swap Volume by Pool")
+    pool_swap = st.selectbox("Select Pool for Volume", ["ZAP/ETH", "ZAP/USDC"])
+    filtered_swap = df[df["Pool"] == pool_swap]
+    fig5 = px.bar(filtered_swap, x="Date", y="Swap_Volume_USD", 
+                  title="Swap Volume by Pool", color_discrete_sequence=["#00b4d8"])
+    fig5.update_layout(template="plotly_dark", title_x=0.5, showlegend=False)
+    st.plotly_chart(fig5, use_container_width=True)
+
+with col6:
+    st.subheader("Yield APR Distribution")
+    yield_type = st.selectbox("Select Yield Type", ["Staking", "Farming", "Lending"])
+    filtered_yield = df[df["Yield_Type"] == yield_type]
+    fig6 = px.histogram(filtered_yield, x="Yield_APR", nbins=20, 
+                        title="Yield APR Distribution", color_discrete_sequence=["#7209b7"])
+    fig6.update_layout(template="plotly_dark", title_x=0.5, showlegend=False)
+    st.plotly_chart(fig6, use_container_width=True)
+
+col7, col8 = st.columns(2)
+
+with col7:
+    st.subheader("Active Users vs. Whale Trades")
+    play_bar = st.button("Animate User Bars")
+    fig7 = go.Figure(data=[
+        go.Bar(x=df["Date"], y=df["Active_Users"], name="Active Users", marker_color="#00b4d8"),
+        go.Bar(x=df["Date"], y=df["Whale_Trades"] * 10, name="Whale Trades (x10)", marker_color="#f72585")
+    ])
+    if play_bar:
+        frames = [go.Frame(data=[
+            go.Bar(x=df["Date"], y=df["Active_Users"] * (k/5)),
+            go.Bar(x=df["Date"], y=df["Whale_Trades"] * 10 * (k/5))
+        ]) for k in range(1, 6)]
+        fig7.frames = frames
+        fig7.update_layout(updatemenus=[dict(type="buttons", buttons=[dict(label="Play",
+                             method="animate", args=[None, {"frame": {"duration": 500}}])])])
+    fig7.update_layout(template="plotly_dark", title="Active Users vs. Whale Trades", title_x=0.5, barmode="group")
+    st.plotly_chart(fig7, use_container_width=True)
+
+with col8:
+    st.subheader("Gas Cost Spread")
+    gas_pool = st.selectbox("Select Pool for Gas", ["ZAP/ETH", "ZAP/USDC"])
+    filtered_gas = df[df["Pool"] == gas_pool]
+    fig8 = px.histogram(filtered_gas, x="Gas_Cost_ETH", nbins=15, 
+                        title="Gas Cost Spread", color_discrete_sequence=["#f72585"])
+    fig8.update_layout(template="plotly_dark", title_x=0.5, showlegend=False)
+    st.plotly_chart(fig8, use_container_width=True)

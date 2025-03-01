@@ -10,6 +10,65 @@ st.set_page_config(layout="wide")
 st.title("DeFi Pulse Explorer")
 st.markdown("Dive into decentralized trading dynamics.")
 
+st.title("Crypto Nebula Flux")
+st.markdown("A 3D journey through Ethereum and Bitcoin dynamics.")
+
+np.random.seed(42)
+dates = pd.date_range("2025-03-01", periods=30, freq="D")
+metrics = ["ETH_Price", "BTC_Price", "ETH_TVL", "BTC_TVL", "ETH_Volume", "BTC_Volume"]
+df = pd.DataFrame({
+    "Date": dates,
+    "ETH_Price": 3000 + np.random.randn(30) * 100,
+    "BTC_Price": 60000 + np.random.randn(30) * 2000,
+    "ETH_TVL": np.random.uniform(5000000, 15000000, 30),
+    "BTC_TVL": np.random.uniform(2000000, 8000000, 30),
+    "ETH_Volume": np.random.uniform(1000000, 5000000, 30),
+    "BTC_Volume": np.random.uniform(800000, 3000000, 30)
+})
+df["Day"] = df.index + 1
+
+x = metrics
+y = dates
+z = df[metrics].values.T
+
+fig = go.Figure(data=[go.Surface(
+    x=x, y=y, z=z,
+    colorscale=[[0, "#2a2a72"], [0.5, "#00d4ff"], [1, "#ff00ff"]],
+    showscale=False
+)])
+
+frames = [go.Frame(data=[go.Surface(z=df[metrics].iloc[:k+1].values.T)]) for k in range(len(df))]
+fig.frames = frames
+
+fig.update_layout(
+    template="plotly_dark",
+    scene=dict(
+        xaxis_title="Metrics",
+        yaxis_title="Date",
+        zaxis_title="Value",
+        bgcolor="#1a1a1a",
+        xaxis=dict(color="white"),
+        yaxis=dict(color="white"),
+        zaxis=dict(color="white")
+    ),
+    updatemenus=[dict(
+        type="buttons",
+        buttons=[dict(label="Play",
+                      method="animate",
+                      args=[None, {"frame": {"duration": 300, "redraw": True},
+                                   "fromcurrent": True, "mode": "immediate"}])]
+    )],
+    height=700,
+    margin=dict(l=0, r=0, t=50, b=0),
+    paper_bgcolor="#1a1a1a",
+    plot_bgcolor="#1a1a1a"
+)
+
+st.plotly_chart(fig, use_container_width=True)
+
+st.markdown("---")
+st.subheader("More Insights Coming...")
+
 np.random.seed(42)
 dates = pd.date_range("2025-03-01", periods=30, freq="D")
 df_defi = pd.DataFrame({

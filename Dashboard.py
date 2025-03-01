@@ -9,6 +9,9 @@ st.set_page_config(layout="wide")
 
 st.title("Interactive Dashboard with Plotly")
 
+st.markdown("## DeFi Pulse Explorer: Dashboard")
+st.link_button("Visit Website", "https://yourlink.com")
+
 st.subheader("Running Scatter Plot")
 
 

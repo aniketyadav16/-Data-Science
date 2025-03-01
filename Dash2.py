@@ -7,6 +7,7 @@ from bokeh.plotting import figure
 from bokeh.models import ColumnDataSource
 from bokeh.palettes import Spectral6
 
+st.set_page_config(layout="wide")  
 st.title("Dashboard 2")
 dates = pd.date_range("2025-03-01", periods=30, freq="D")
 np.random.seed(42)

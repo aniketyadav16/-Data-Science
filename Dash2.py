@@ -47,7 +47,7 @@ with col1:
     pool_choice = st.radio("Pool", ["ZAP/ETH", "ZAP/USDC", "Both"], index=2)
     filtered_df = df_defi if pool_choice == "Both" else df_defi[df_defi["Pool"] == pool_choice]
     fig1 = px.sunburst(filtered_df, path=["Pool", "Yield_Type", "Date"], values="APR_Size",
-                       color="Yield_APR", color_continuous_scale="Plasma",
+                       color="Yield_APR", color_continuous_scale="Tropic",
                        title="Yield Farming Breakdown")
     fig1.update_layout(template="plotly_dark", title_x=0.5, margin=dict(t=50, l=0, r=0, b=0))
     st.plotly_chart(fig1, use_container_width=True)

@@ -10,7 +10,7 @@ st.set_page_config(layout="wide")
 st.title("DeFi Pulse Explorer")
 st.markdown("Dive into decentralized trading dynamics.")
 
-st.markdown("Tracking system stress in crypto trucking operations.")
+st.sub_header("Blockchain Pipeline Pressure")
 
 np.random.seed(42)
 dates = pd.date_range("2025-03-01", periods=30, freq="D")
@@ -40,8 +40,6 @@ fig.frames = frames
 
 fig.update_layout(
     template="plotly_dark",
-    title="Blockchain Pipeline Pressure",
-    title_x=0.5,
     xaxis_title="Date",
     yaxis_title="Value",
     barmode="stack",

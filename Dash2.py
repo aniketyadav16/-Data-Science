@@ -1,6 +1,8 @@
 import streamlit as st
 import plotly.express as px
 import plotly.graph_objects as go
+from bokeh.plotting import figure
+from bokeh.models import ColumnDataSource
 import seaborn as sns
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -26,7 +28,7 @@ df["Yield_Type"] = np.random.choice(["Staking", "Farming", "Lending"], len(df))
 df["APR_Size"] = df["Yield_APR"].abs()
 df["Day"] = df.index + 1
 
-col1 = st.columns(2)
+col1, col2 = st.columns(2)
 
 with col1:
     st.subheader("Yield Farming Breakdown")
@@ -37,6 +39,18 @@ with col1:
                        title="Yield Farming Breakdown")
     fig1.update_layout(template="plotly_dark", title_x=0.5, margin=dict(t=50, l=0, r=0, b=0))
     st.plotly_chart(fig1, use_container_width=True)
+
+with col2:
+    st.subheader("Gas Cost Flow")
+    pivot_df = df.pivot_table(values="Gas_Cost_ETH", index="Date", columns="Pool", fill_value=0)
+    source = ColumnDataSource(pivot_df)
+    p = figure(x_axis_type="datetime", title="Gas Cost Flow", height=300, width=600, background_fill_color="#1a1a1a")
+    p.varea_stack(stackers=pivot_df.columns, x="Date", source=source, color=["#00b4d8", "#7209b7"], legend_label=list(pivot_df.columns))
+    p.legend.location = "top_left"
+    p.xgrid.grid_line_color = None
+    p.ygrid.grid_line_color = "#3a3a3a"
+    p.outline_line_color = None
+    st.bokeh_chart(p, use_container_width=True)
 
 col3, col4 = st.columns(2)
 
@@ -65,16 +79,13 @@ with col4:
             color="#00b4d8"
         ))])
     if play_button:
-        frames = [go.Frame(data=[go.Sankey(link=dict(value=[v * (k/10), 30000, 20000, 40000]))]) 
+        frames = [go.Frame(data=[go.Sankey(link=dict(value=[v * (k/10), 30000, 20000, 40000]))])
                   for k, v in enumerate([50000, 45000, 40000, 35000, 30000], 1)]
         fig4.frames = frames
         fig4.update_layout(updatemenus=[dict(type="buttons", buttons=[dict(label="Play",
                              method="animate", args=[None, {"frame": {"duration": 500}}])])])
     fig4.update_layout(template="plotly_dark", title="Liquidity Flow Between Pools", title_x=0.5, font_size=10)
     st.plotly_chart(fig4, use_container_width=True)
-
-
-
 
 
 

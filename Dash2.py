@@ -1,8 +1,6 @@
 import streamlit as st
 import plotly.express as px
 import plotly.graph_objects as go
-from bokeh.plotting import figure
-from bokeh.models import ColumnDataSource
 import seaborn as sns
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -41,16 +39,29 @@ with col1:
     st.plotly_chart(fig1, use_container_width=True)
 
 with col2:
-    st.subheader("Gas Cost Flow")
-    pivot_df = df.pivot_table(values="Gas_Cost_ETH", index="Date", columns="Pool", fill_value=0)
-    source = ColumnDataSource(pivot_df)
-    p = figure(x_axis_type="datetime", title="Gas Cost Flow", height=300, width=600, background_fill_color="#1a1a1a")
-    p.varea_stack(stackers=pivot_df.columns, x="Date", source=source, color=["#00b4d8", "#7209b7"], legend_label=list(pivot_df.columns))
-    p.legend.location = "top_left"
-    p.xgrid.grid_line_color = None
-    p.ygrid.grid_line_color = "#3a3a3a"
-    p.outline_line_color = None
-    st.bokeh_chart(p, use_container_width=True)
+    st.subheader("Gas Cost Connections")
+    play_button_gas = st.button("Animate Gas Flow")
+    gas_matrix = np.array([
+        [0, df[df["Pool"] == "ZAP/ETH"]["Gas_Cost_ETH"].mean()],
+        [df[df["Pool"] == "ZAP/USDC"]["Gas_Cost_ETH"].mean(), 0]
+    ])
+    fig2 = go.Figure(data=go.Chord(
+        colorscale="Plasma",
+        ideogram_length=15,
+        domain={"x": [0, 1], "y": [0, 1]},
+        value=gas_matrix.flatten(),
+        source=[0, 1],
+        target=[1, 0],
+        label=["ZAP/ETH", "ZAP/USDC"]
+    ))
+    if play_button_gas:
+        frames = [go.Frame(data=[go.Chord(value=[g * (k/5) for g in gas_matrix.flatten()])])
+                  for k in range(1, 6)]
+        fig2.frames = frames
+        fig2.update_layout(updatemenus=[dict(type="buttons", buttons=[dict(label="Play",
+                             method="animate", args=[None, {"frame": {"duration": 500}}])])])
+    fig2.update_layout(template="plotly_dark", title="Gas Cost Connections", title_x=0.5)
+    st.plotly_chart(fig2, use_container_width=True)
 
 col3, col4 = st.columns(2)
 
@@ -86,8 +97,6 @@ with col4:
                              method="animate", args=[None, {"frame": {"duration": 500}}])])])
     fig4.update_layout(template="plotly_dark", title="Liquidity Flow Between Pools", title_x=0.5, font_size=10)
     st.plotly_chart(fig4, use_container_width=True)
-
-
 
 
 

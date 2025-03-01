@@ -10,7 +10,7 @@ st.set_page_config(layout="wide")
 st.title("DeFi Pulse Explorer")
 st.markdown("Dive into decentralized trading dynamics.")
 
-st.sub_header("Blockchain Pipeline Pressure")
+st.subheader("Blockchain Pipeline Pressure")
 
 np.random.seed(42)
 dates = pd.date_range("2025-03-01", periods=30, freq="D")

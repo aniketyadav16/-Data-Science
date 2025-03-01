@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-st.set_page_config(layout="wide")  
+st.set_page_config(layout="wide")
 
 st.title("Interactive Dashboard with Plotly")
 

@@ -41,7 +41,6 @@ fig.frames = frames
 fig.update_layout(
     template="plotly_dark",
     title = "Blockahin Pipeline Pressure",
-    title=0.8,
     xaxis_title="Date",
     yaxis_title="Value",
     barmode="stack",

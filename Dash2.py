@@ -45,13 +45,6 @@ fig.update_layout(
     xaxis_title="Date",
     yaxis_title="Value",
     barmode="stack",
-    updatemenus=[dict(
-        type="buttons",
-        buttons=[dict(label="Play",
-                      method="animate",
-                      args=[None, {"frame": {"duration": 300, "redraw": True},
-                                   "fromcurrent": True, "mode": "immediate"}])]
-    )],
     height=700,
     margin=dict(l=0, r=0, t=50, b=0),
     paper_bgcolor="#1a1a1a",

@@ -9,8 +9,8 @@ st.set_page_config(layout="wide")
 
 st.title("Interactive Dashboard with Plotly")
 
-st.markdown("## DeFi Pulse Explorer: Dashboard##")
-st.link_button("DeFi Data Dashboard", "https://vizzardd.streamlit.app")
+st.markdown("## DeFi Pulse Explorer: Dashboard")
+st.link_button("DeFi Data Dashboard CLICK HERE!!", "https://vizzardd.streamlit.app")
 
 st.subheader("Running Scatter Plot")
 

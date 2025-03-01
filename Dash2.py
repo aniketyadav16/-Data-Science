@@ -39,28 +39,19 @@ with col1:
     st.plotly_chart(fig1, use_container_width=True)
 
 with col2:
-    st.subheader("Gas Cost Connections")
-    play_button_gas = st.button("Animate Gas Flow")
-    gas_matrix = np.array([
-        [0, df[df["Pool"] == "ZAP/ETH"]["Gas_Cost_ETH"].mean()],
-        [df[df["Pool"] == "ZAP/USDC"]["Gas_Cost_ETH"].mean(), 0]
-    ])
-    fig2 = go.Figure(data=go.Chord(
-        colorscale="Plasma",
-        ideogram_length=15,
-        domain={"x": [0, 1], "y": [0, 1]},
-        value=gas_matrix.flatten(),
-        source=[0, 1],
-        target=[1, 0],
-        label=["ZAP/ETH", "ZAP/USDC"]
-    ))
+    st.subheader("Gas vs. Trading Metrics")
+    play_button_gas = st.button("Animate Gas Metrics")
+    fig2 = px.parallel_coordinates(df, color="Gas_Cost_ETH",
+                                   dimensions=["Swap_Volume_USD", "Liquidity_USD", "Active_Users", "Gas_Cost_ETH"],
+                                   color_continuous_scale="Plasma",
+                                   title="Gas vs. Trading Metrics")
     if play_button_gas:
-        frames = [go.Frame(data=[go.Chord(value=[g * (k/5) for g in gas_matrix.flatten()])])
+        frames = [go.Frame(data=[go.Parcoords(line=dict(color=df["Gas_Cost_ETH"] * (k/5)))])
                   for k in range(1, 6)]
         fig2.frames = frames
         fig2.update_layout(updatemenus=[dict(type="buttons", buttons=[dict(label="Play",
                              method="animate", args=[None, {"frame": {"duration": 500}}])])])
-    fig2.update_layout(template="plotly_dark", title="Gas Cost Connections", title_x=0.5)
+    fig2.update_layout(template="plotly_dark", title_x=0.5)
     st.plotly_chart(fig2, use_container_width=True)
 
 col3, col4 = st.columns(2)
@@ -97,8 +88,4 @@ with col4:
                              method="animate", args=[None, {"frame": {"duration": 500}}])])])
     fig4.update_layout(template="plotly_dark", title="Liquidity Flow Between Pools", title_x=0.5, font_size=10)
     st.plotly_chart(fig4, use_container_width=True)
-
-
-
-
 

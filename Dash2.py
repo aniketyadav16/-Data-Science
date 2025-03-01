@@ -33,7 +33,7 @@ with col1:
     pool_choice = st.radio("Pool", ["ZAP/ETH", "ZAP/USDC", "Both"], index=2)
     filtered_df = df if pool_choice == "Both" else df[df["Pool"] == pool_choice]
     fig1 = px.sunburst(filtered_df, path=["Pool", "Yield_Type", "Date"], values="APR_Size",
-                       color="Yield_APR", color_continuous_scale="Agsunset",
+                       color="Yield_APR", color_continuous_scale="Plasma",
                        title="Yield Farming Breakdown")
     fig1.update_layout(template="plotly_dark", title_x=0.5, margin=dict(t=50, l=0, r=0, b=0))
     st.plotly_chart(fig1, use_container_width=True)
@@ -43,7 +43,7 @@ with col2:
     play_button_gas = st.button("Animate Gas Metrics")
     fig2 = px.parallel_coordinates(df, color="Gas_Cost_ETH",
                                    dimensions=["Swap_Volume_USD", "Liquidity_USD", "Active_Users", "Gas_Cost_ETH"],
-                                   color_continuous_scale="Tropic",
+                                   color_continuous_scale="Agsunset",
                                    title="Gas vs. Trading Metrics")
     if play_button_gas:
         frames = [go.Frame(data=[go.Parcoords(line=dict(color=df["Gas_Cost_ETH"] * (k/5)))])

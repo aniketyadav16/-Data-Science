@@ -10,13 +10,6 @@ st.set_page_config(layout="wide")
 st.title("DeFi Pulse Explorer")
 st.markdown("Dive into decentralized trading dynamics.")
 
-import streamlit as st
-import plotly.graph_objects as go
-import pandas as pd
-import numpy as np
-
-st.set_page_config(layout="wide")
-st.title("Blockchain Pipeline Pressure")
 st.markdown("Tracking system stress in crypto trucking operations.")
 
 np.random.seed(42)

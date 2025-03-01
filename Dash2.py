@@ -43,7 +43,7 @@ with col2:
     play_button_gas = st.button("Animate Gas Metrics")
     fig2 = px.parallel_coordinates(df, color="Gas_Cost_ETH",
                                    dimensions=["Swap_Volume_USD", "Liquidity_USD", "Active_Users", "Gas_Cost_ETH"],
-                                   color_continuous_scale="Plasma",
+                                   color_continuous_scale="Tropic",
                                    title="Gas vs. Trading Metrics")
     if play_button_gas:
         frames = [go.Frame(data=[go.Parcoords(line=dict(color=df["Gas_Cost_ETH"] * (k/5)))])

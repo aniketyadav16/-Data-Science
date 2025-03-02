@@ -137,18 +137,13 @@ with col3:
     st.pyplot(fig)
 
 with col4:
-    st.subheader("Liquidity Flow Between Pools")
-    play_button = st.button("Animate Liquidity Flow")
-    labels = ["ZAP/ETH_Day1", "ZAP/USDC_Day1", "ZAP/ETH_Day2", "ZAP/USDC_Day2"]
-    fig4 = go.Figure(data=[go.Sankey(
-        node=dict(label=labels, color="#7209b7"),
-        link=dict(
-            source=[0, 1, 0, 1],
-            target=[2, 3, 3, 2],
-            value=[50000, 30000, 20000, 40000],
-            color="#00b4d8"
-        ))])
-    st.plotly_chart(fig4)
+    st.subheader("Traging Dynamics")
+    filtered_df = df_defi 
+    fig222 = px.scatter_3d(filtered_df, x="Swap_Volume_USD", y="Gas_Cost_ETH", z="Date",
+                        size="Active_Users", color="Pool", title="Trading Dynamics (3D)", color_discrete_sequence=['cyan','magenta'],
+                        labels={"Swap_Volume_USD": "Volume ($)", "Gas_Cost_ETH": "Gas (ETH)", "Active_Users": "Users"})
+    fig222.update_traces(marker=dict(opacity=0.7))
+    st.plotly_chart(fig222)
 
 col5, col6 = st.columns(2)
 
@@ -367,13 +362,6 @@ fig.update_layout(
         yaxis=dict(color="white"),
         zaxis=dict(color="white")
     ),
-    updatemenus=[dict(
-        type="buttons",
-        buttons=[dict(label="Play",
-                      method="animate",
-                      args=[None, {"frame": {"duration": 300, "redraw": True},
-                                   "fromcurrent": True, "mode": "immediate"}])]
-    )],
     height=700,
     margin=dict(l=0, r=0, t=50, b=0),
     plot_bgcolor="#1a1a1a"

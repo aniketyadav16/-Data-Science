@@ -164,6 +164,7 @@ with col4:
             value=[50000, 30000, 20000, 40000],
             color="#00b4d8"
         ))])
+    st.plotly_chart(fig4)
 
 col5, col6 = st.columns(2)
 

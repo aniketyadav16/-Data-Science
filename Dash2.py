@@ -126,15 +126,76 @@ st.plotly_chart(fig)
 col3, col4 = st.columns(2)
 
 with col3:
+    import streamlit as st
+    import plotly.graph_objects as go
+    import pandas as pd
+    
     st.subheader("Whale Trade Distribution")
-    pool_filter = st.multiselect("Filter Pools", df_defi["Pool"].unique(), default=df_defi["Pool"].unique())
-    filtered_df = df_defi[df_defi["Pool"].isin(pool_filter)]
-    fig, ax = plt.subplots(figsize=(8, 4), facecolor="#1a1a1a")
-    sns.violinplot(x="Pool", y="Whale_Trades", data=filtered_df, ax=ax, palette=["#00b4d8", "#7209b7"])
-    ax.set_title("Whale Trade Distribution", color="white")
-    ax.set_facecolor("#1a1a1a")
-    ax.tick_params(colors="white")
-    st.pyplot(fig)
+    
+    filtered_df = df_defi
+    
+    fig = go.Figure()
+    colors = {"ZAP/ETH": "#00b4d8", "ZAP/USDC": "#7209b7"}  
+    
+    for pool in filtered_df["Pool"].unique():
+        pool_data = filtered_df[filtered_df["Pool"] == pool]
+        fig.add_trace(
+            go.Violin(
+                x=[pool] * len(pool_data),
+                y=pool_data["Whale_Trades"],
+                name=pool,
+                box_visible=True,  
+                meanline_visible=True, 
+                points="all", 
+                pointpos=-1.8,  # Position points to the left
+                jitter=0.05,  # Subtle jitter for point spread
+                fillcolor=colors[pool],  # Fill color for each pool
+                opacity=0.8,  # Slightly transparent fill
+                line=dict(color="white", width=1),  # White outline for contrast
+                marker=dict(
+                    size=6,  # Larger points for visibility
+                    color=pool_data["Whale_Trades"],  # Continuous color for points
+                    colorscale="Plasma",  # Gradient for points
+                    showscale=True,  # Show colorbar
+                    cmin=filtered_df["Whale_Trades"].min(),
+                    cmax=filtered_df["Whale_Trades"].max(),
+                    opacity=0.6  # Subtle point transparency
+                ),
+                hoverinfo="y+name"  # Show value and pool name on hover
+            )
+        )
+    
+    fig.update_layout(
+        template="plotly_dark", 
+        paper_bgcolor="#1a1a1a",  
+        plot_bgcolor="#1a1a1a",
+        font=dict(color="white"),  
+        xaxis=dict(
+            tickfont=dict(size=14, color="white"),
+            title="Pool",
+            title_font=dict(size=16, color="white"),
+            gridcolor="rgba(255, 255, 255, 0.1)" 
+        ),
+        yaxis=dict(
+            tickfont=dict(size=14, color="white"),
+            title="Whale Trades",
+            title_font=dict(size=16, color="white"),
+            gridcolor="rgba(255, 255, 255, 0.1)"  # Subtle grid
+        ),
+        legend=dict(
+            x=1.05, y=1,  # Position legend to the right
+            bgcolor="rgba(0, 0, 0, 0.5)",  # Semi-transparent background
+            bordercolor="white",
+            borderwidth=1,
+            font=dict(size=12, color="white")
+        ),
+        margin=dict(l=50, r=50, t=80, b=50),  
+        height=500  
+    )
+    
+    
+    st.plotly_chart(fig, use_container_width=True)
+
 
 with col4:
     st.subheader("Traging Dynamics")

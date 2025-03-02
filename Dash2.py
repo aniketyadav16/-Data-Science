@@ -40,14 +40,11 @@ fig.frames = frames
 
 fig.update_layout(
     template="plotly_dark",
-    title = "Blockahin Pipeline Pressure",
     xaxis_title="Date",
     yaxis_title="Value",
     barmode="stack",
     height=700,
     margin=dict(l=0, r=0, t=50, b=0),
-    paper_bgcolor="#1a1a1a",
-    plot_bgcolor="#1a1a1a",
     legend=dict(x=0.9, y=0.99, bgcolor="rgba(0,0,0,0)")
 )
 st.plotly_chart(fig, use_container_width=True)
@@ -94,7 +91,7 @@ with col1:
     filtered_df = df_defi 
     fig1 = px.sunburst(filtered_df, path=["Pool", "Yield_Type", "Date"], values="APR_Size",
                        color="Yield_APR", color_continuous_scale="Viridis_r",
-                       title="Yield Farming Breakdown")
+                       title=" ")
     fig1.update_layout(template="plotly_dark", title_x=0.5, margin=dict(t=50, l=0, r=0, b=0))
     st.plotly_chart(fig1, use_container_width=True)
 
@@ -103,7 +100,7 @@ with col2:
     fig2 = px.parallel_coordinates(df_defi, color="Gas_Cost_ETH",
                                    dimensions=["Swap_Volume_USD", "Liquidity_USD", "Active_Users", "Gas_Cost_ETH"],
                                    color_continuous_scale="Plasma",
-                                   title="Gas vs. Trading Metrics")
+                                   title=" ")
     fig2.update_layout(template="plotly_dark", title_x=0.5)
     st.plotly_chart(fig2, use_container_width=True)
 
@@ -121,7 +118,7 @@ frames = [go.Frame(data=[
         go.Scatter(x=filtered_df["Date"][:k], y=filtered_df["Swap_Volume_USD"][:k], fill="tozeroy"),
         go.Scatter(x=filtered_df["Date"][:k], y=filtered_df["Liquidity_USD"][:k], fill="tozeroy")
         ]) for k in range(1, len(filtered_df)+1)]
-fig.update_layout(title="Swap Volume VS Liquidity", title_x=0.4, height=500)
+fig.update_layout(title=" ", title_x=0.4, height=500)
 fig.frames = frames
 st.plotly_chart(fig)
         

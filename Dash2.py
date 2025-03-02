@@ -107,6 +107,7 @@ with col2:
     fig2.update_layout(template="plotly_dark", title_x=0.5)
     st.plotly_chart(fig2, use_container_width=True)
 
+st.subheader("Swap Volume VS Liquidity")
 df_defi["Day"] = df.index + 1 
 filtered_df = df_defi
     
@@ -120,7 +121,7 @@ frames = [go.Frame(data=[
         go.Scatter(x=filtered_df["Date"][:k], y=filtered_df["Swap_Volume_USD"][:k], fill="tozeroy"),
         go.Scatter(x=filtered_df["Date"][:k], y=filtered_df["Liquidity_USD"][:k], fill="tozeroy")
         ]) for k in range(1, len(filtered_df)+1)]
-fig.update_layout(title="Swap Volume VS Liquidity")
+fig.update_layout(title="Swap Volume VS Liquidity", title_x=0.5, height=500)
 fig.frames = frames
 st.plotly_chart(fig)
         

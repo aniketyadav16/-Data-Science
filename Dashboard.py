@@ -163,7 +163,7 @@ ax.set_xticks(angles)
 ax.set_xticklabels(labels)
 ax.set_title("Polar Chart")
 st.title("Polar Chart in Streamlit")
-st.pyplot(fig)
+st.pyplot(fig, use_container_width=True)
 
 plt.style.use('default')
 st.subheader("Gapmider: 2007 GDP Analysis")

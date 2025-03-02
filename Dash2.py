@@ -93,7 +93,7 @@ with col1:
     st.markdown("Tip: Click on Farming") 
     filtered_df = df_defi 
     fig1 = px.sunburst(filtered_df, path=["Pool", "Yield_Type", "Date"], values="APR_Size",
-                       color="Yield_APR", color_continuous_scale="Plasma_r",
+                       color="Yield_APR", color_continuous_scale="Viridis_r",
                        title="Yield Farming Breakdown")
     fig1.update_layout(template="plotly_dark", title_x=0.5, margin=dict(t=50, l=0, r=0, b=0))
     st.plotly_chart(fig1, use_container_width=True)

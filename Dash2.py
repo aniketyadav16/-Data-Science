@@ -328,6 +328,19 @@ with col16:
     fig16.update_layout(template="plotly_dark", title_x=0.5, showlegend=False)
     st.plotly_chart(fig16, use_container_width=True)
 
+st.title(" Trading Volume ")
+x = np.linspace(0, 10, 50)
+y = np.linspace(0, 10, 50)
+X, Y = np.meshgrid(x, y)
+Z = np.sin(X) * np.cos(Y) * np.random.rand(50, 50) * 100
+
+fig121 = go.Figure(data=[go.Surface(z=Z, x=X, y=Y, colorscale="Viridis")])
+
+fig121.update_layout(title="DeFi Trading Volume Heatmap", title_x=0.5,
+                  width=900, height=700, template="plotly_dark")
+
+st.plotly_chart(fig121)
+
 
 st.title("Crypto Nebula Flux")
 st.markdown("A 3D journey through Ethereum and Bitcoin dynamics.")

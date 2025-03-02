@@ -128,7 +128,7 @@ col3, col4 = st.columns(2)
 with col3:
         
     st.subheader("Whale Trade Distribution")
-    filtered_df = df
+    filtered_df = df_defi
     fig = px.violin(filtered_df, x="Pool", y="Whale_Trades", color="Pool",
                     color_discrete_sequence=["#00b4d8", "#7209b7"],
                     template="plotly_dark",)

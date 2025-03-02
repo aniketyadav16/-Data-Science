@@ -101,17 +101,10 @@ with col1:
 
 with col2:
     st.subheader("Gas vs. Trading Metrics")
-    play_button_gas = st.button("Animate Gas Metrics")
     fig2 = px.parallel_coordinates(df_defi, color="Gas_Cost_ETH",
                                    dimensions=["Swap_Volume_USD", "Liquidity_USD", "Active_Users", "Gas_Cost_ETH"],
                                    color_continuous_scale="Plasma",
                                    title="Gas vs. Trading Metrics")
-    if play_button_gas:
-        frames = [go.Frame(data=[go.Parcoords(line=dict(color=df_defi["Gas_Cost_ETH"] * (k/5)))])
-                  for k in range(1, 6)]
-        fig2.frames = frames
-        fig2.update_layout(updatemenus=[dict(type="buttons", buttons=[dict(label="Play",
-                             method="animate", args=[None, {"frame": {"duration": 500}}])])])
     fig2.update_layout(template="plotly_dark", title_x=0.5)
     st.plotly_chart(fig2, use_container_width=True)
 

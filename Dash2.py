@@ -134,6 +134,7 @@ with cole:
         go.Scatter(x=filtered_df["Date"][:k], y=filtered_df["Swap_Volume_USD"][:k], fill="tozeroy"),
         go.Scatter(x=filtered_df["Date"][:k], y=filtered_df["Liquidity_USD"][:k], fill="tozeroy")
     ]) for k in range(1, len(filtered_df)+1)]
+    fig.update_layout(width=500)
     fig.frames = frames
     st.plotly_chart(fig)
         

@@ -100,7 +100,7 @@ with col3:
     fig223 = go.Figure(data=[go.Scatter3d(x=x, y=y, z=z, mode='lines',
                                        line=dict(width=4, color='cyan'))])
     
-    fig223.update_layout(width=900, height=700, template="plotly_dark", title_x=0.5)
+    fig223.update_layout(title = " ",width=900, height=700, template="plotly_dark", title_x=0.5)
     
     st.plotly_chart(fig223)
 

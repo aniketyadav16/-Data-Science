@@ -132,9 +132,6 @@ with col3:
     fig = px.violin(filtered_df, x="Pool", y="Whale_Trades", color="Pool",
                     color_discrete_sequence=["#00b4d8", "#7209b7"],
                     template="plotly_dark",)
-    fig.update_layout(
-        plot_bgcolor="#1a1a1a",
-        paper_bgcolor="#1a1a1a")
     
     fig.update_xaxes(tickfont=dict(color="white"))
     fig.update_yaxes(title='Whale Trades (in Million $)',tickfont=dict(color="white"))

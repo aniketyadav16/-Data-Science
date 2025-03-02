@@ -111,8 +111,7 @@ colw, cole = st.columns(2)
 
 with colw:
     st.subheader("Traging Dynamics")
-    show_both = st.sidebar.checkbox("Show Both Pools", value=True)
-    filtered_df = df_defi if show_both else df_defi[df_defi["Pool"] == st.sidebar.selectbox("Pool", df_defi["Pool"].unique())]
+    filtered_df = df_defi 
     fig222 = px.scatter_3d(filtered_df, x="Swap_Volume_USD", y="Gas_Cost_ETH", z="Date",
                         size="Active_Users", color="Pool", title="Trading Dynamics (3D)", color_discrete_sequence=['cyan','magenta'],
                         labels={"Swap_Volume_USD": "Volume ($)", "Gas_Cost_ETH": "Gas (ETH)", "Active_Users": "Users"})
@@ -120,9 +119,7 @@ with colw:
     st.plotly_chart(fig222)
 with cole:
     df_defi["Day"] = df.index + 1 
-    
-    pool = st.sidebar.selectbox("Select Pool", df_defi["Pool"].unique())
-    filtered_df = df_defi[df_defi["Pool"] == pool]
+    filtered_df = df_defi
     
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=filtered_df["Date"], y=filtered_df["Swap_Volume_USD"], 

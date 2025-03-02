@@ -336,8 +336,8 @@ Z = np.sin(X) * np.cos(Y) * np.random.rand(50, 50) * 100
 
 fig121 = go.Figure(data=[go.Surface(z=Z, x=X, y=Y, colorscale="Viridis")])
 
-fig121.update_layout(title="DeFi Trading Volume Heatmap", title_x=0.5,
-                  width=900, height=700, template="plotly_dark")
+fig121.update_layout(title="DeFi Trading Volume Heatmap", title_x=0.4,
+                  width=900, height=600, template="plotly_dark")
 
 st.plotly_chart(fig121)
 

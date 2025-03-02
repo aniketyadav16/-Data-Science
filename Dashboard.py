@@ -53,40 +53,55 @@ fig2.update_layout(title="US Export of Plastic Scrap",
                    height=500, width=1400)
 st.plotly_chart(fig2)
 
-st.subheader("Influencer Performance over 12 Months")
+col2, col3 = st.columns(2)
+with col2:
+    st.subheader("Influencer Performance over 12 Months")
+    
+    a3 = {
+        "date": [
+            "2023-01-31", "2023-02-28", "2023-03-31", "2023-04-30", "2023-05-31", "2023-06-30", "2023-07-31",
+            "2023-08-31", "2023-09-30", "2023-10-31", "2023-11-30", "2023-12-31",
+            "2023-01-31", "2023-02-28", "2023-03-31", "2023-04-30", "2023-05-31", "2023-06-30", "2023-07-31",
+            "2023-08-31", "2023-09-30", "2023-10-31", "2023-11-30", "2023-12-31",
+            "2023-01-31", "2023-02-28", "2023-03-31", "2023-04-30", "2023-05-31", "2023-06-30", "2023-07-31",
+            "2023-08-31", "2023-09-30", "2023-10-31", "2023-11-30", "2023-12-31"
+        ],
+        "influencer": [
+            "Influencer A"] * 12 + ["Influencer B"] * 12 + ["Influencer C"] * 12,
+        "followers": [
+            3732, 7339, 9992, 14256, 16091, 17854, 20585, 25016, 27049, 31844, 33121, 35899,
+            3328, 7475, 12117, 17161, 21309, 26277, 30139, 32344, 37402, 41501, 45136, 48858,
+            4872, 8969, 11870, 13607, 17700, 21020, 25045, 28185, 31548, 33724, 35679, 40660
+        ]
+    }
+    a3 = pd.DataFrame(a3)
+    a3['date'] = pd.to_datetime(a3['date'])
+    a3['month'] = a3['date'].dt.month
+    fig8 = px.bar(
+        a3,
+        x='influencer',
+        color='followers',
+        y='followers',
+        animation_frame='month',
+        color_continuous_scale='tropic',
+        width=10,
+        template='plotly_dark'
+    )
+    fig8.update_layout(height=600, width=500, transition = {'duration':1000})
+    st.plotly_chart(fig8)
 
-a3 = {
-    "date": [
-        "2023-01-31", "2023-02-28", "2023-03-31", "2023-04-30", "2023-05-31", "2023-06-30", "2023-07-31",
-        "2023-08-31", "2023-09-30", "2023-10-31", "2023-11-30", "2023-12-31",
-        "2023-01-31", "2023-02-28", "2023-03-31", "2023-04-30", "2023-05-31", "2023-06-30", "2023-07-31",
-        "2023-08-31", "2023-09-30", "2023-10-31", "2023-11-30", "2023-12-31",
-        "2023-01-31", "2023-02-28", "2023-03-31", "2023-04-30", "2023-05-31", "2023-06-30", "2023-07-31",
-        "2023-08-31", "2023-09-30", "2023-10-31", "2023-11-30", "2023-12-31"
-    ],
-    "influencer": [
-        "Influencer A"] * 12 + ["Influencer B"] * 12 + ["Influencer C"] * 12,
-    "followers": [
-        3732, 7339, 9992, 14256, 16091, 17854, 20585, 25016, 27049, 31844, 33121, 35899,
-        3328, 7475, 12117, 17161, 21309, 26277, 30139, 32344, 37402, 41501, 45136, 48858,
-        4872, 8969, 11870, 13607, 17700, 21020, 25045, 28185, 31548, 33724, 35679, 40660
-    ]
-}
-a3 = pd.DataFrame(a3)
-a3['date'] = pd.to_datetime(a3['date'])
-a3['month'] = a3['date'].dt.month
-fig8 = px.bar(
-    a3,
-    x='influencer',
-    color='followers',
-    y='followers',
-    animation_frame='month',
-    color_continuous_scale='tropic',
-    width=10,
-    template='plotly_dark'
-)
-fig8.update_layout(height=600, width=500, transition = {'duration':1000})
-st.plotly_chart(fig8)
+with col3:
+    t = np.linspace(0, 4*np.pi, 100)
+    x = np.sin(t)
+    y = np.cos(t)
+    z = t
+    
+    fig223 = go.Figure(data=[go.Scatter3d(x=x, y=y, z=z, mode='lines',
+                                       line=dict(width=4, color='cyan'))])
+    
+    fig223.update_layout(title="3D Wave Motion", width=900, height=700, template="plotly_dark", title_x=0.5)
+    
+    st.plotly_chart(fig223)
 
 
 

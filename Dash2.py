@@ -334,7 +334,7 @@ y = np.linspace(0, 10, 50)
 X, Y = np.meshgrid(x, y)
 Z = np.sin(X) * np.cos(Y) * np.random.rand(50, 50) * 100
 
-fig121 = go.Figure(data=[go.Surface(z=Z, x=X, y=Y, colorscale="Viridis")])
+fig121 = go.Figure(data=[go.Surface(z=Z, x=X, y=Y, colorscale=""Earth)])
 
 fig121.update_layout(title="DeFi Trading Volume Heatmap", title_x=0.4,
                   width=900, height=600, template="plotly_dark")
@@ -392,7 +392,6 @@ fig.update_layout(
     )],
     height=700,
     margin=dict(l=0, r=0, t=50, b=0),
-    paper_bgcolor="#1a1a1a",
     plot_bgcolor="#1a1a1a"
 )
 

@@ -135,9 +135,6 @@ with cole:
         go.Scatter(x=filtered_df["Date"][:k], y=filtered_df["Liquidity_USD"][:k], fill="tozeroy")
     ]) for k in range(1, len(filtered_df)+1)]
     fig.frames = frames
-    fig.update_layout(updatemenus=[dict(type="buttons", buttons=[dict(label="Play", 
-                            method="animate", args=[None, {"frame": {"duration": 400}}])])],
-                      title="Swap Volume vs. Liquidity (Animated)")
     st.plotly_chart(fig)
         
 

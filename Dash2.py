@@ -91,8 +91,7 @@ col1, col2 = st.columns(2)
 with col1:
     st.subheader("Yield Farming Breakdown")
     st.markdown("Tip: Click on Farming") 
-    pool_choice = st.radio("Pool", ["ZAP/ETH", "ZAP/USDC", "Both"], index=2)
-    filtered_df = df_defi if pool_choice == "Both" else df_defi[df_defi["Pool"] == pool_choice]
+    filtered_df = df_defi 
     fig1 = px.sunburst(filtered_df, path=["Pool", "Yield_Type", "Date"], values="APR_Size",
                        color="Yield_APR", color_continuous_scale="Tropic",
                        title="Yield Farming Breakdown")

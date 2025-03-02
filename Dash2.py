@@ -114,7 +114,7 @@ with colw:
     show_both = st.sidebar.checkbox("Show Both Pools", value=True)
     filtered_df = df_defi if show_both else df_defi[df_defi["Pool"] == st.sidebar.selectbox("Pool", df_defi["Pool"].unique())]
     fig222 = px.scatter_3d(filtered_df, x="Swap_Volume_USD", y="Gas_Cost_ETH", z="Date",
-                        size="Active_Users", color="Pool", title="Trading Dynamics (3D)",
+                        size="Active_Users", color="Pool", title="Trading Dynamics (3D)", color_-d
                         labels={"Swap_Volume_USD": "Volume ($)", "Gas_Cost_ETH": "Gas (ETH)", "Active_Users": "Users"})
     fig222.update_traces(marker=dict(opacity=0.7))
     st.plotly_chart(fig222)

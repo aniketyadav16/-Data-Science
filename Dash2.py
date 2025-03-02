@@ -107,33 +107,22 @@ with col2:
     fig2.update_layout(template="plotly_dark", title_x=0.5)
     st.plotly_chart(fig2, use_container_width=True)
 
-colw, cole = st.columns(2)
-
-with colw:
-    st.subheader("Traging Dynamics")
-    filtered_df = df_defi 
-    fig222 = px.scatter_3d(filtered_df, x="Swap_Volume_USD", y="Gas_Cost_ETH", z="Date",
-                        size="Active_Users", color="Pool", title="Trading Dynamics (3D)", color_discrete_sequence=['cyan','magenta'],
-                        labels={"Swap_Volume_USD": "Volume ($)", "Gas_Cost_ETH": "Gas (ETH)", "Active_Users": "Users"})
-    fig222.update_traces(marker=dict(opacity=0.7))
-    st.plotly_chart(fig222)
-with cole:
-    df_defi["Day"] = df.index + 1 
-    filtered_df = df_defi
+df_defi["Day"] = df.index + 1 
+filtered_df = df_defi
     
-    fig = go.Figure()
-    fig.add_trace(go.Scatter(x=filtered_df["Date"], y=filtered_df["Swap_Volume_USD"], 
+fig = go.Figure()
+fig.add_trace(go.Scatter(x=filtered_df["Date"], y=filtered_df["Swap_Volume_USD"], 
                              fill="tozeroy", name="Swap Volume ($)", mode="lines"))
-    fig.add_trace(go.Scatter(x=filtered_df["Date"], y=filtered_df["Liquidity_USD"], 
+fig.add_trace(go.Scatter(x=filtered_df["Date"], y=filtered_df["Liquidity_USD"], 
                              fill="tozeroy", name="Liquidity ($)", mode="lines", opacity=0.5))
     
-    frames = [go.Frame(data=[
+frames = [go.Frame(data=[
         go.Scatter(x=filtered_df["Date"][:k], y=filtered_df["Swap_Volume_USD"][:k], fill="tozeroy"),
         go.Scatter(x=filtered_df["Date"][:k], y=filtered_df["Liquidity_USD"][:k], fill="tozeroy")
-    ]) for k in range(1, len(filtered_df)+1)]
-    fig.update_layout(title="Swap Volume VS Liquidity")
-    fig.frames = frames
-    st.plotly_chart(fig)
+        ]) for k in range(1, len(filtered_df)+1)]
+fig.update_layout(title="Swap Volume VS Liquidity")
+fig.frames = frames
+st.plotly_chart(fig)
         
 
 col3, col4 = st.columns(2)

@@ -115,6 +115,40 @@ with col2:
     fig2.update_layout(template="plotly_dark", title_x=0.5)
     st.plotly_chart(fig2, use_container_width=True)
 
+colw, cole = st.columns(2)
+
+with colw:
+    st.subheader("Traging Dynamics")
+    show_both = st.sidebar.checkbox("Show Both Pools", value=True)
+    filtered_df = df_defi if show_both else df_defi[df_defi["Pool"] == st.sidebar.selectbox("Pool", df_defi["Pool"].unique())]
+    fig222 = px.scatter_3d(filtered_df, x="Swap_Volume_USD", y="Gas_Cost_ETH", z="Date",
+                        size="Active_Users", color="Pool", title="Trading Dynamics (3D)",
+                        labels={"Swap_Volume_USD": "Volume ($)", "Gas_Cost_ETH": "Gas (ETH)", "Active_Users": "Users"})
+    fig222.update_traces(marker=dict(opacity=0.7))
+    st.plotly_chart(fig222)
+with cole:
+    df_defi["Day"] = df.index + 1 
+    
+    pool = st.sidebar.selectbox("Select Pool", df_defi["Pool"].unique())
+    filtered_df = df_defi[df_defi["Pool"] == pool]
+    
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=filtered_df["Date"], y=filtered_df["Swap_Volume_USD"], 
+                             fill="tozeroy", name="Swap Volume ($)", mode="lines"))
+    fig.add_trace(go.Scatter(x=filtered_df["Date"], y=filtered_df["Liquidity_USD"], 
+                             fill="tozeroy", name="Liquidity ($)", mode="lines", opacity=0.5))
+    
+    frames = [go.Frame(data=[
+        go.Scatter(x=filtered_df["Date"][:k], y=filtered_df["Swap_Volume_USD"][:k], fill="tozeroy"),
+        go.Scatter(x=filtered_df["Date"][:k], y=filtered_df["Liquidity_USD"][:k], fill="tozeroy")
+    ]) for k in range(1, len(filtered_df)+1)]
+    fig.frames = frames
+    fig.update_layout(updatemenus=[dict(type="buttons", buttons=[dict(label="Play", 
+                            method="animate", args=[None, {"frame": {"duration": 400}}])])],
+                      title="Swap Volume vs. Liquidity (Animated)")
+    st.plotly_chart(fig)
+        
+
 col3, col4 = st.columns(2)
 
 with col3:
@@ -140,14 +174,6 @@ with col4:
             value=[50000, 30000, 20000, 40000],
             color="#00b4d8"
         ))])
-    if play_button:
-        frames = [go.Frame(data=[go.Sankey(link=dict(value=[v * (k/10), 30000, 20000, 40000]))])
-                  for k, v in enumerate([50000, 45000, 40000, 35000, 30000], 1)]
-        fig4.frames = frames
-        fig4.update_layout(updatemenus=[dict(type="buttons", buttons=[dict(label="Play",
-                             method="animate", args=[None, {"frame": {"duration": 500}}])])])
-    fig4.update_layout(template="plotly_dark", title="Liquidity Flow Between Pools", title_x=0.5, font_size=10)
-    st.plotly_chart(fig4, use_container_width=True)
 
 col5, col6 = st.columns(2)
 

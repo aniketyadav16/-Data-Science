@@ -155,7 +155,7 @@ sizes = [45, 30, 25]
 colors = ['gold', 'plum', 'burlywood']
 
 angles = np.linspace(0, 2 * np.pi, len(labels), endpoint=False).tolist()
-fig, ax = plt.subplots(figsize=(4,4), subplot_kw=dict(polar=True))
+fig, ax = plt.subplots(figsize=(2,2), subplot_kw=dict(polar=True))
 
 ax.bar(angles, sizes, width=0.3, color=colors, align='edge')
 

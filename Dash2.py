@@ -130,7 +130,7 @@ with col3:
     st.subheader("Whale Trade Distribution")
     filtered_df = df_defi
     fig = px.violin(filtered_df, x="Pool", y="Whale_Trades", color="Pool",
-                    color_discrete_sequence=["#00b4d8", "#7209b7"],
+                    color_discrete_sequence=["gold", "magenta"],
                     template="plotly_dark",)
     
     fig.update_xaxes(tickfont=dict(color="white"))

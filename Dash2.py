@@ -185,7 +185,7 @@ with col7:
         fig7.frames = frames
         fig7.update_layout(updatemenus=[dict(type="buttons", buttons=[dict(label="Play",
                               method="animate", args=[None, {"frame": {"duration": 500}}])])])
-    fig7.update_layout(template="plotly_dark", title="Active Users vs. Whale Trades", title_x=0.28, barmode="group")
+    fig7.update_layout(template="plotly_dark", barmode="group")
     st.plotly_chart(fig7, use_container_width=True)
 
 with col8:
@@ -234,7 +234,7 @@ with col11:
         fig11.frames = frames
         fig11.update_layout(updatemenus=[dict(type="buttons", buttons=[dict(label="Play",
                               method="animate", args=[None, {"frame": {"duration": 500}}])])])
-    fig11.update_layout(template="plotly_dark", title="ETH Gas vs. BTC Tx Fees", title_x=0.3, barmode="group")
+    fig11.update_layout(template="plotly_dark", barmode="group")
     st.plotly_chart(fig11, use_container_width=True)
 
 with col12:
@@ -257,7 +257,7 @@ with col13:
                            name="ETH Price (USD)", marker_color="#00b4d8", yaxis="y1"))
     fig13.add_trace(go.Bar(x=filtered_vol["Date"], y=filtered_vol["Haul_Value_USD"], 
                            name="Haul Value (USD)", marker_color="#7209b7", yaxis="y2"))
-    fig13.update_layout(template="plotly_dark", title="ETH Price Volatility vs. Haul Value", title_x=0.3,
+    fig13.update_layout(template="plotly_dark",
                         yaxis=dict(title="ETH Price"), yaxis2=dict(title="Haul Value", overlaying="y", side="right"))
     st.plotly_chart(fig13, use_container_width=True)
 
@@ -298,7 +298,7 @@ with col15:
         fig15.frames = frames
         fig15.update_layout(updatemenus=[dict(type="buttons", buttons=[dict(label="Play",
                               method="animate", args=[None, {"frame": {"duration": 500}}])])])
-    fig15.update_layout(template="plotly_dark", title="ETH Wallet Activity by Truck", title_x=0.3, barmode="group")
+    fig15.update_layout(template="plotly_dark", barmode="group")
     st.plotly_chart(fig15, use_container_width=True)
 
 with col16:

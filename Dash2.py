@@ -156,7 +156,7 @@ with col5:
     filtered_swap = df_defi[df_defi["Pool"] == pool_swap]
     fig5 = px.bar(filtered_swap, x="Date", y="Swap_Volume_USD", 
                   title="Swap Volume by Pool", color_discrete_sequence=["#00b4d8"])
-    fig5.update_layout(template="plotly_dark", title_x=0.5, showlegend=False)
+    fig5.update_layout(template="plotly_dark", title_x=0.4, showlegend=False)
     st.plotly_chart(fig5, use_container_width=True)
 
 with col6:
@@ -165,7 +165,7 @@ with col6:
     filtered_yield = df_defi[df_defi["Yield_Type"] == yield_type]
     fig6 = px.histogram(filtered_yield, x="Yield_APR", nbins=20, 
                         title="Yield APR Distribution", color_discrete_sequence=["#7209b7"])
-    fig6.update_layout(template="plotly_dark", title_x=0.5, showlegend=False)
+    fig6.update_layout(template="plotly_dark", title_x=0.4, showlegend=False)
     st.plotly_chart(fig6, use_container_width=True)
 
 col7, col8 = st.columns(2)
@@ -185,7 +185,7 @@ with col7:
         fig7.frames = frames
         fig7.update_layout(updatemenus=[dict(type="buttons", buttons=[dict(label="Play",
                               method="animate", args=[None, {"frame": {"duration": 500}}])])])
-    fig7.update_layout(template="plotly_dark", title="Active Users vs. Whale Trades", title_x=0.5, barmode="group")
+    fig7.update_layout(template="plotly_dark", title="Active Users vs. Whale Trades", title_x=0.4, barmode="group")
     st.plotly_chart(fig7, use_container_width=True)
 
 with col8:
@@ -194,7 +194,7 @@ with col8:
     filtered_gas = df_defi[df_defi["Pool"] == gas_pool]
     fig8 = px.histogram(filtered_gas, x="Gas_Cost_ETH", nbins=15, 
                         title="Gas Cost Spread", color_discrete_sequence=["#f72585"])
-    fig8.update_layout(template="plotly_dark", title_x=0.5, showlegend=False)
+    fig8.update_layout(template="plotly_dark", title_x=0.4, showlegend=False)
     st.plotly_chart(fig8, use_container_width=True)
 
 col9, col10 = st.columns(2)
@@ -205,7 +205,7 @@ with col9:
     filtered_truck = df_truck[df_truck["Truck_ID"] == truck_choice]
     fig9 = px.bar(filtered_truck, x="Date", y="Haul_Value_USD", 
                   title="Haul Value by Truck (USD)", color_discrete_sequence=["#00b4d8"])
-    fig9.update_layout(template="plotly_dark", title_x=0.5, showlegend=False)
+    fig9.update_layout(template="plotly_dark", title_x=0.4, showlegend=False)
     st.plotly_chart(fig9, use_container_width=True)
 
 with col10:
@@ -214,7 +214,7 @@ with col10:
     filtered_gas = df_truck[df_truck["Truck_ID"] == truck_gas]
     fig10 = px.histogram(filtered_gas, x="ETH_Gas_Cost", nbins=15, 
                          title="ETH Gas Cost Distribution", color_discrete_sequence=["#7209b7"])
-    fig10.update_layout(template="plotly_dark", title_x=0.5, showlegend=False)
+    fig10.update_layout(template="plotly_dark", title_x=0.4, showlegend=False)
     st.plotly_chart(fig10, use_container_width=True)
 
 col11, col12 = st.columns(2)
@@ -234,7 +234,7 @@ with col11:
         fig11.frames = frames
         fig11.update_layout(updatemenus=[dict(type="buttons", buttons=[dict(label="Play",
                               method="animate", args=[None, {"frame": {"duration": 500}}])])])
-    fig11.update_layout(template="plotly_dark", title="ETH Gas vs. BTC Tx Fees", title_x=0.5, barmode="group")
+    fig11.update_layout(template="plotly_dark", title="ETH Gas vs. BTC Tx Fees", title_x=0.4, barmode="group")
     st.plotly_chart(fig11, use_container_width=True)
 
 with col12:
@@ -243,7 +243,7 @@ with col12:
     filtered_payout = df_truck[df_truck["Truck_ID"] == truck_payout]
     fig12 = px.histogram(filtered_payout, x="Driver_Payout_ETH", nbins=15, 
                          title="Driver Payout Spread", color_discrete_sequence=["#f72585"])
-    fig12.update_layout(template="plotly_dark", title_x=0.5, showlegend=False)
+    fig12.update_layout(template="plotly_dark", title_x=0.4, showlegend=False)
     st.plotly_chart(fig12, use_container_width=True)
 
 col13, col14 = st.columns(2)
@@ -257,7 +257,7 @@ with col13:
                            name="ETH Price (USD)", marker_color="#00b4d8", yaxis="y1"))
     fig13.add_trace(go.Bar(x=filtered_vol["Date"], y=filtered_vol["Haul_Value_USD"], 
                            name="Haul Value (USD)", marker_color="#7209b7", yaxis="y2"))
-    fig13.update_layout(template="plotly_dark", title="ETH Price Volatility vs. Haul Value", title_x=0.5,
+    fig13.update_layout(template="plotly_dark", title="ETH Price Volatility vs. Haul Value", title_x=0.4,
                         yaxis=dict(title="ETH Price"), yaxis2=dict(title="Haul Value", overlaying="y", side="right"))
     st.plotly_chart(fig13, use_container_width=True)
 
@@ -267,7 +267,7 @@ with col14:
     filtered_btc = df_truck[df_truck["Truck_ID"] == truck_btc]
     fig14 = px.histogram(filtered_btc, x="BTC_Tx_Fee", nbins=15, 
                          title="BTC Transaction Fee Spread", color_discrete_sequence=["#f72585"])
-    fig14.update_layout(template="plotly_dark", title_x=0.5, showlegend=False)
+    fig14.update_layout(template="plotly_dark", title_x=0.4, showlegend=False)
     st.plotly_chart(fig14, use_container_width=True)
 
 col15, col16 = st.columns(2)
@@ -298,7 +298,7 @@ with col15:
         fig15.frames = frames
         fig15.update_layout(updatemenus=[dict(type="buttons", buttons=[dict(label="Play",
                               method="animate", args=[None, {"frame": {"duration": 500}}])])])
-    fig15.update_layout(template="plotly_dark", title="ETH Wallet Activity by Truck", title_x=0.5, barmode="group")
+    fig15.update_layout(template="plotly_dark", title="ETH Wallet Activity by Truck", title_x=0.4, barmode="group")
     st.plotly_chart(fig15, use_container_width=True)
 
 with col16:
@@ -307,7 +307,7 @@ with col16:
     filtered_mempool = df_truck[df_truck["Truck_ID"] == truck_mempool]
     fig16 = px.histogram(filtered_mempool, x="BTC_Mempool_Size_MB", nbins=15, 
                          title="BTC Mempool Congestion", color_discrete_sequence=["#7209b7"])
-    fig16.update_layout(template="plotly_dark", title_x=0.5, showlegend=False)
+    fig16.update_layout(template="plotly_dark", title_x=0.4, showlegend=False)
     st.plotly_chart(fig16, use_container_width=True)
 
 st.title(" Trading Volume ")

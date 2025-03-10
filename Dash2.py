@@ -316,7 +316,7 @@ y = np.linspace(0, 10, 50)
 X, Y = np.meshgrid(x, y)
 Z = np.sin(X) * np.cos(Y) * np.random.rand(50, 50) * 100
 
-fig121 = go.Figure(data=[go.Surface(z=Z, x=X, y=Y, colorscale="Earth")])
+fig121 = go.Figure(data=[go.Surface(z=Z, x=X, y=Y, colorscale="Plasma")])
 
 fig121.update_layout(title="DeFi Trading Volume Heatmap", title_x=0.4,
                   width=900, height=600, template="plotly_dark")
@@ -347,7 +347,7 @@ z = df[metrics].values.T
 
 fig = go.Figure(data=[go.Surface(
     x=x, y=y, z=z,
-    colorscale=[[0, "#2a2a72"], [0.5, "#00d4ff"], [1, "#ff00ff"]],
+    colorscale=[[0, 'magenta'],[0.3, "turquoise"], [0.6, "gold"], [1, "hotpink"]],
     showscale=False
 )])
 
@@ -360,14 +360,12 @@ fig.update_layout(
         xaxis_title="Metrics",
         yaxis_title="Date",
         zaxis_title="Value",
-        bgcolor="#1a1a1a",
         xaxis=dict(color="white"),
         yaxis=dict(color="white"),
         zaxis=dict(color="white")
     ),
     height=700,
-    margin=dict(l=0, r=0, t=50, b=0),
-    plot_bgcolor="#1a1a1a"
+    margin=dict(l=0, r=0, t=50, b=0)
 )
 
 st.plotly_chart(fig, use_container_width=True)
